@@ -33,7 +33,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Centraliza a lista */
+
 #listaCarros {
     list-style: none; 
     padding: 0;
@@ -41,4 +41,48 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center; 
+}
+
+/* Editar a tabela */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #007BFF;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.btn-editar, .btn-excluir {
+    border: none;
+    padding: 8px 12px;
+    margin: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.btn-editar {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-excluir {
+    background-color: #dc3545;
+    color: white;
 }

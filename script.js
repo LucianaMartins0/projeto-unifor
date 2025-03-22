@@ -1,8 +1,6 @@
-// Inicializa o Parse com suas credenciais
 Parse.initialize("yXDH0u6E4f0GeDLnyozflrSD2exzkXzKIYsl74sH", "qFugOIJ12RV2L66EvIbh1FjrK29wExisQ7GCfm06"); 
 Parse.serverURL = "https://parseapi.back4app.com/";
 
-// Função para adicionar um carro
 async function adicionarCarro() {
     const Carro = Parse.Object.extend("Carros");
     const novoCarro = new Carro();
@@ -22,45 +20,65 @@ async function adicionarCarro() {
     }
 }
 
-// Função para listar os carros cadastrados
 async function listarCarros() {
     const query = new Parse.Query("Carros");
 
     try {
         const carros = await query.find();
         let lista = document.getElementById("listaCarros");
-        lista.innerHTML = ""; // Limpa a lista
+        lista.innerHTML = `
+            <table>
+                <thead>
+                    <tr>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Ano</th>
+                        <th>Cor</th>
+                        <th>Valor</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaCarros">
+                </tbody>
+            </table>
+        `;
+
+        let tabela = document.getElementById("tabelaCarros");
 
         carros.forEach((carro) => {
-            lista.innerHTML += `
-                <li>
-                    ${carro.get("marca")} - ${carro.get("modelo")} - ${carro.get("ano")} - 
-                    ${carro.get("cor")} - R$ ${carro.get("valor").toFixed(2)}
-                    <button onclick="editarCarro('${carro.id}')">Editar</button>
-                    <button onclick="excluirCarro('${carro.id}')">Excluir</button>
-                </li>`;
+            tabela.innerHTML += `
+                <tr>
+                    <td>${carro.get("marca")}</td>
+                    <td>${carro.get("modelo")}</td>
+                    <td>${carro.get("ano")}</td>
+                    <td>${carro.get("cor")}</td>
+                    <td>R$ ${carro.get("valor").toFixed(2)}</td>
+                    <td>
+                        <button class="btn-editar" onclick="editarCarro('${carro.id}')">Editar</button>
+                        <button class="btn-excluir" onclick="excluirCarro('${carro.id}')">Excluir</button>
+                    </td>
+                </tr>
+            `;
         });
     } catch (error) {
         console.error("Erro ao buscar carros:", error);
     }
 }
 
-// Função para excluir um carro
 async function excluirCarro(objectId) {
-    const Carro = Parse.Object.extend("Carros"); // Nome da classe no Back4App
+    const Carro = Parse.Object.extend("Carros"); 
     const query = new Parse.Query(Carro);
 
     try {
         const carro = await query.get(objectId);
-        await carro.destroy(); // Exclui do banco de dados
+        await carro.destroy(); 
         alert("Carro excluído com sucesso!");
-        carregarCarros(); // Atualiza a lista
+        carregarCarros(); 
     } catch (error) {
         console.error("Erro ao excluir carro:", error);
     }
 }
 
-// Função para editar um carro
 async function editarCarro(objectId) {
     const Carro = Parse.Object.extend("Carros");
     const query = new Parse.Query(Carro);
@@ -68,7 +86,7 @@ async function editarCarro(objectId) {
     try {
         const carro = await query.get(objectId);
 
-        // Capturar os novos valores
+        
         const novaMarca = prompt("Digite a nova marca do carro:", carro.get("marca"));
         if (!novaMarca) return;
 
@@ -84,26 +102,24 @@ async function editarCarro(objectId) {
         const novoValor = prompt("Digite o novo valor do carro:", carro.get("valor"));
         if (!novoValor || isNaN(novoValor)) return;
 
-        // Atualizar os dados do carro
+        
         carro.set("marca", novaMarca);
         carro.set("modelo", novoModelo);
         carro.set("ano", parseInt(novoAno));
         carro.set("cor", novaCor);
         carro.set("valor", parseFloat(novoValor));
 
-        await carro.save(); // Salva no banco de dados
+        await carro.save(); 
         alert("Carro atualizado com sucesso!");
-        listarCarros(); // Atualiza a lista na tela
+        listarCarros(); 
     } catch (error) {
         console.error("Erro ao editar carro:", error);
     }
 }
 
-
-// Função para carregar carros e exibir na lista
 async function carregarCarros() {
     const lista = document.getElementById("listaCarros");
-    lista.innerHTML = ""; // Limpa a lista antes de carregar
+    lista.innerHTML = ""; 
 
     const Carro = Parse.Object.extend("Carros");
     const query = new Parse.Query(Carro);
@@ -124,5 +140,5 @@ async function carregarCarros() {
     }
 }
 
-// Chama a função ao carregar a página
+
 listarCarros();
