@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD de Carros</title>
+    <script src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <h1>Cadastro de Carros</h1>
+    <input type="text" id="marca" placeholder="Marca">
+    <input type="text" id="modelo" placeholder="Modelo">
+    <input type="number" id="ano" placeholder="Ano">
+    <input type="text" id="cor" placeholder="Cor">
+    <input type="number" id="valor" placeholder="Valor">
+    <button onclick="adicionarCarro()">Adicionar Carro</button>
+
+    <h2>Lista de Carros</h2>
+    <ul id="listaCarros"></ul>
+</body>
+</html>
