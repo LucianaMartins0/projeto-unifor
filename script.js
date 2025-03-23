@@ -1,3 +1,5 @@
+/* script.js realizado pelos alunos: Luciana Soares Martins (2327070) - Git Hub: LucianaMartins0  e - Diego Bruno Rocha Silva (2326754) - Git Hub: DiegoRochaSilva */
+
 Parse.initialize("yXDH0u6E4f0GeDLnyozflrSD2exzkXzKIYsl74sH", "qFugOIJ12RV2L66EvIbh1FjrK29wExisQ7GCfm06"); 
 Parse.serverURL = "https://parseapi.back4app.com/";
 
